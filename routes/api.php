@@ -8,38 +8,38 @@ Route::get('/', function () {
     return ['ok' => true, 'message' => 'Api Sistema de Seguimiento de Trámite de Certificados 1.0'];
 });
 
-Route::prefix('v1')->group(function () {
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(function () {
     // Autenticación
-    Route::post('login', [AuthController::class, 'login']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/profile', [AuthController::class, 'profile']);
 
-    Route::middleware('api')->group(function () {
-        Route::middleware('auth:sanctum')->group(function () {
-            // Autenticación
-            Route::post('logout', [AuthController::class, 'logout']);
-            Route::post('profile', [AuthController::class, 'profile']);
+    // Usuarios
+    Route::get('/users', [UserController::class, 'index']);
+    Route::post('/users', [UserController::class, 'register']);
+    Route::get('/users/{id}', [UserController::class, 'show']);
+    Route::put('/users/{id}', [UserController::class, 'update']);
+    Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
-            // Usuarios
-            Route::get('users', [UserController::class, 'index']);
-            Route::post('users', [UserController::class, 'register']);
-            Route::get('users/{id}', [UserController::class, 'show']);
-            Route::put('users/{id}', [UserController::class, 'update']);
-            Route::delete('users/{id}', [UserController::class, 'destroy']);
+    // Trámites
 
-            // Trámites
+    // Estudiantes
 
-            // Estudiantes
+    // Certificados
 
-            // Certificados
+    // Reportes
 
-            // Reportes
+    // Configuración
 
-            // Configuración
+    // Roles
 
-            // Roles
+    // Permisos
 
-            // Permisos
-
-            
-        });
-    });
 });
+
+/*
+|--------------------------------------------------------------------------
+| Rutas Frontend en Vue.js folder Router - index.ts
+|--------------------------------------------------------------------------
+*/
