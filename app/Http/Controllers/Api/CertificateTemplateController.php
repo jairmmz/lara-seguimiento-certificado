@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Course;
+use App\Http\Controllers\Controller;
+use App\Models\CertificateTemplate;
 use Illuminate\Http\Request;
 
-class CourseController extends Controller
+class CertificateTemplateController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Course $course)
+    public function show(CertificateTemplate $certificateTemplate)
     {
         //
     }
@@ -42,7 +43,7 @@ class CourseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Course $course)
+    public function edit(CertificateTemplate $certificateTemplate)
     {
         //
     }
@@ -50,7 +51,7 @@ class CourseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Course $course)
+    public function update(Request $request, CertificateTemplate $certificateTemplate)
     {
         //
     }
@@ -58,7 +59,7 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Course $course)
+    public function destroy(CertificateTemplate $certificateTemplate)
     {
         //
     }

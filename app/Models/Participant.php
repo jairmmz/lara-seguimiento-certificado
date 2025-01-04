@@ -10,6 +10,7 @@ class Participant extends Model
         'name',
         'first_name',
         'last_name',
+        'identification',
         'email',
         'phone'
     ];

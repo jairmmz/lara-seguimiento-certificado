@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('participant_id')->constrained();
             $table->foreignId('course_id')->constrained();
+            $table->foreignId('certificate_template_id')->constrained();
             $table->date('issue_date');
             $table->string('certificate_url');
             $table->enum('status', ['pendiente', 'completado', 'cancelado'])->default('pendiente');

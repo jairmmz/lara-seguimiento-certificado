@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\CertificateTemplate;
+use App\Http\Controllers\Controller;
+use App\Models\Enrollment;
 use Illuminate\Http\Request;
 
-class CertificateTemplateController extends Controller
+class EnrollmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class CertificateTemplateController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CertificateTemplate $certificateTemplate)
+    public function show(Enrollment $enrollment)
     {
         //
     }
@@ -42,7 +43,7 @@ class CertificateTemplateController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CertificateTemplate $certificateTemplate)
+    public function edit(Enrollment $enrollment)
     {
         //
     }
@@ -50,7 +51,7 @@ class CertificateTemplateController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CertificateTemplate $certificateTemplate)
+    public function update(Request $request, Enrollment $enrollment)
     {
         //
     }
@@ -58,7 +59,7 @@ class CertificateTemplateController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CertificateTemplate $certificateTemplate)
+    public function destroy(Enrollment $enrollment)
     {
         //
     }

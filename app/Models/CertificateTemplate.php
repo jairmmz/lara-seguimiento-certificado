@@ -10,4 +10,9 @@ class CertificateTemplate extends Model
         'name',
         'template_file'
     ];
+
+    public function certificates()
+    {
+        return $this->hasMany(Certificate::class);
+    }
 }

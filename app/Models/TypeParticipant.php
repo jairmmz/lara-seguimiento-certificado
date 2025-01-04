@@ -10,4 +10,9 @@ class TypeParticipant extends Model
         'name',
         'description'
     ];
+
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class);
+    }
 }
