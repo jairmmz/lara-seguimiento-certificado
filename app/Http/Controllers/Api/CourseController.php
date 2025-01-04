@@ -3,64 +3,80 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Course;
-use Illuminate\Http\Request;
+use App\Http\Requests\CourseRegisterRequest;
+use App\Http\Requests\CourseUpdateRequest;
+use App\Services\CourseService;
+use Illuminate\Http\JsonResponse;
 
 class CourseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct(
+        private CourseService $courseService
+    ) { }
+
+    public function index(): JsonResponse
     {
-        //
+        try {
+            $courses = $this->courseService->index();
+
+            return $this->success('Cursos obtenidos con éxito', $courses);
+        } catch (\Throwable $th) {
+            return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id): JsonResponse
     {
-        //
+        try {
+            $course = $this->courseService->show($id);
+
+            return $this->success('Curso obtenido con éxito', $course);
+        } catch (\Throwable $th) {
+            return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function showDetail($id): JsonResponse
     {
-        //
+        try {
+            $course = $this->courseService->showDetail($id);
+
+            return $this->success('Curso obtenido con éxito', $course);
+        } catch (\Throwable $th) {
+            return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Course $course)
+    public function store(CourseRegisterRequest $request): JsonResponse
     {
-        //
+        try {
+            $course = $this->courseService->store($request->toCourseDTO());
+
+            return $this->success('Curso registrado con éxito', $course);
+        } catch (\Throwable $th) {
+            return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Course $course)
+    public function update(CourseUpdateRequest $request, $id): JsonResponse
     {
-        //
+        try {
+            $course = $this->courseService->update($request->toCourseDTO(), $id);
+
+            return $this->success('Curso actualizado con éxito', $course);
+        } catch (\Throwable $th) {
+            return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Course $course)
+    public function destroy($id): JsonResponse
     {
-        //
-    }
+        try {
+            $this->courseService->destroy($id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Course $course)
-    {
-        //
+            return $this->success('Curso eliminado con éxito');
+        } catch (\Throwable $th) {
+            return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
+        }
     }
 }

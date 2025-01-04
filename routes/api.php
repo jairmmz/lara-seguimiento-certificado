@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CourseController;
+use App\Http\Controllers\Api\ParticipantController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,10 +24,25 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/users/{id}', [UserController::class, 'update']);
     Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
-    // Estudiantes
+    // Participantes
+    Route::get('/participants', [ParticipantController::class, 'index']);
+    Route::get('/participants/show/{id}', [ParticipantController::class, 'show']);
+    Route::get('/participants/show-detail/{id}', [ParticipantController::class, 'showDetail']);
+    Route::post('/participants', [ParticipantController::class, 'store']);
+    Route::put('/participants/{id}', [ParticipantController::class, 'update']);
+    Route::delete('/participants/{id}', [ParticipantController::class, 'destroy']);
+
+    // Cursos
+    Route::get('/courses', [CourseController::class, 'index']);
+    Route::get('/courses/show/{id}', [CourseController::class, 'show']);
+    Route::get('/courses/show-detail/{id}', [CourseController::class, 'showDetail']);
+    Route::post('/courses', [CourseController::class, 'store']);
+    Route::put('/courses/{id}', [CourseController::class, 'update']);
+    Route::delete('/courses/{id}', [CourseController::class, 'destroy']);
 
     // Certificados
 
+    // Matriculas - Inscripciones
 
 });
 
