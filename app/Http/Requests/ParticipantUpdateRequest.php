@@ -22,12 +22,11 @@ class ParticipantUpdateRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:100'],
-            'first_name' => ['required', 'string', 'max:100'],
-            'last_name' => ['required', 'string', 'max:100'],
-            'identification' => ['required', 'string', 'max:20'],
-            'email' => ['nullable', 'string', 'email', 'max:50', 'unique:participants,email,' . $this->route('id')],
-            'phone' => ['nullable', 'string', 'max:20', 'unique:participants,phone,' . $this->route('id')],
+            'name' => 'required'|'string'|'max:100',
+            'last_name' => 'required'|'string'|'max:100',
+            'identification' => 'required'|'string'|'max:20',
+            'email' => 'nullable|string|email|max:50|unique:participants,email,' . $this->route('id'),
+            'phone' => 'nullable'|'string'|'max:20'|'unique:participants,phone,' . $this->route('id'),
         ];
     }
 
@@ -37,9 +36,6 @@ class ParticipantUpdateRequest extends BaseRequest
             'name.required' => 'El campo nombre es obligatorio',
             'name.string' => 'El campo nombre debe ser un texto',
             'name.max' => 'El campo nombre debe tener máximo 100 caracteres',
-            'first_name.required' => 'El campo primer nombre es obligatorio',
-            'first_name.string' => 'El campo primer nombre debe ser un texto',
-            'first_name.max' => 'El campo primer nombre debe tener máximo 100 caracteres',
             'last_name.required' => 'El campo primer apellido es obligatorio',
             'last_name.string' => 'El campo primer apellido debe ser un texto',
             'last_name.max' => 'El campo primer apellido debe tener máximo 100 caracteres',
@@ -60,7 +56,6 @@ class ParticipantUpdateRequest extends BaseRequest
     {
         return new ParticipantDTO(
             name: $this->name,
-            first_name: $this->first_name,
             last_name: $this->last_name,
             identification: $this->identification,
             email: $this->email,

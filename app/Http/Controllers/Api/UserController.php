@@ -27,9 +27,9 @@ class UserController extends Controller
     public function register(UserRegisterRequest $request): JsonResponse
     {
         try {
-            $user = $this->userService->register($request->toUserDTO());
+            $this->userService->register($request->toUserDTO());
 
-            return $this->success('Usuario registrado con éxito', $user);
+            return $this->success('Usuario registrado con éxito', null, 201);
         } catch (\Throwable $th) {
             return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
         }
@@ -49,9 +49,9 @@ class UserController extends Controller
     public function update(UserRegisterRequest $request, int $id): JsonResponse
     {
         try {
-            $user = $this->userService->update($request->toUserDTO(), $id);
+            $this->userService->update($request->toUserDTO(), $id);
 
-            return $this->success('Usuario actualizado con éxito', $user);
+            return $this->success('Usuario actualizado con éxito');
         } catch (\Throwable $th) {
             return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
         }

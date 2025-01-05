@@ -15,6 +15,7 @@ class EnrollmentDetailResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'participant_id' => $this->participant_id,
             'type_participant_id' => $this->type_participant_id,
             'course_id' => $this->course_id,

@@ -12,37 +12,30 @@ class ParticipantService
     public function index()
     {
         $participants = Participant::all();
-
         return ParticipantResource::collection($participants);
     }
 
     public function show($id)
     {
         $participant = Participant::findOrFail($id);
-
         return new ParticipantResource($participant);
     }
 
     public function showDetail($id)
     {
         $participant = Participant::with('enrollments.course', 'enrollments.typeParticipant')->findOrFail($id);
-
         return ParticipantDetailResource::make($participant);
     }
 
-    public function store(ParticipantDTO $dto)
+    public function store(ParticipantDTO $dto): void
     {
-        $participant = Participant::create($dto->toArray());
-
-        return new ParticipantResource($participant);
+        Participant::create($dto->toArray());
     }
 
-    public function update(ParticipantDTO $dto, $id)
+    public function update(ParticipantDTO $dto, $id): void
     {
         $participant = Participant::findOrFail($id);
         $participant->update($dto->toArray());
-
-        return new ParticipantResource($participant);
     }
 
     public function destroy($id): void

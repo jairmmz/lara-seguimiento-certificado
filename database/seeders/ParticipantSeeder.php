@@ -18,8 +18,7 @@ class ParticipantSeeder extends Seeder
             [
                 'id' => 1,
                 'name' => 'Juan',
-                'first_name' => 'Perez',
-                'last_name' => 'Gomez',
+                'last_name' => 'Perez Gomez',
                 'identification' => '12345678',
                 'email' => 'jperez@example.com',
                 'phone' => '987654321',
@@ -27,8 +26,7 @@ class ParticipantSeeder extends Seeder
             [
                 'id' => 2,
                 'name' => 'Maria',
-                'first_name' => 'Gomez',
-                'last_name' => 'Perez',
+                'last_name' => 'Quispe Perez',
                 'identification' => '75698282',
                 'email' => 'mariz1@example.com',
                 'phone' => '123456789',
@@ -36,8 +34,7 @@ class ParticipantSeeder extends Seeder
             [
                 'id' => 3,
                 'name' => 'Pedro',
-                'first_name' => 'Gomez',
-                'last_name' => 'Perez',
+                'last_name' => 'Garcia Quiroz',
                 'identification' => '16325489',
                 'email' => 'pedrito1@example.com',
                 'phone' => '987584521',
@@ -45,8 +42,7 @@ class ParticipantSeeder extends Seeder
             [
                 'id' => 4,
                 'name' => 'Ana',
-                'first_name' => 'Perez',
-                'last_name' => 'Gomez',
+                'last_name' => 'Gomez Chavez',
                 'identification' => '21478652',
                 'email' => 'anaperz@example.com',
                 'phone' => '9875896254',
@@ -54,8 +50,7 @@ class ParticipantSeeder extends Seeder
             [
                 'id' => 5,
                 'name' => 'Luis',
-                'first_name' => 'Gomez',
-                'last_name' => 'Perez',
+                'last_name' => 'Perez Gomez',
                 'identification' => '25418762',
                 'email' => 'lucho2@example.com',
                 'phone' => '9875896256',

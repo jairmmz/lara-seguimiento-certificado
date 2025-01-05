@@ -15,17 +15,15 @@ class UserService
         return UserResource::collection(User::all());
     }
 
-    public function register(UserDTO $userDTO): UserResource
+    public function register(UserDTO $userDTO): void
     {
-        $user = User::create([
+        User::create([
             'name' => $userDTO->name,
             'email' => $userDTO->email,
             'password' => bcrypt($userDTO->password),
-            'role' => RoleEnum::Admin->value,
+            'role' => $userDTO->role,
             'is_active' => $userDTO->is_active,
         ]);
-
-        return UserResource::make($user);
     }
 
     public function show(int $id): UserResource
@@ -33,7 +31,7 @@ class UserService
         return UserResource::make(User::findOrFail($id));
     }
 
-    public function update(UserDTO $userDTO, int $id): UserResource
+    public function update(UserDTO $userDTO, int $id): void
     {
         $user = User::findOrFail($id);
 
@@ -41,11 +39,9 @@ class UserService
             'name' => $userDTO->name,
             'email' => $userDTO->email,
             'password' => bcrypt($userDTO->password),
-            'role' => RoleEnum::Admin->value,
+            'role' => $userDTO->role,
             'is_active' => $userDTO->is_active,
         ]);
-
-        return UserResource::make($user);
     }
 
     public function destroy(int $id): void

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ParticipantRegisterRequest;
+use App\Http\Requests\ParticipantUpdateRequest;
 use App\Services\ParticipantService;
 use Illuminate\Http\JsonResponse;
 
@@ -49,20 +50,20 @@ class ParticipantController extends Controller
     public function store(ParticipantRegisterRequest $request): JsonResponse
     {
         try {
-            $participant = $this->participantService->store($request->toParticipantDTO());
+            $this->participantService->store($request->toParticipantDTO());
 
-            return $this->success('Participante registrado con éxito', $participant);
+            return $this->success('Participante registrado con éxito', null, 201);
         } catch (\Throwable $th) {
             return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
         }
     }
 
-    public function update(ParticipantRegisterRequest $request, $id): JsonResponse
+    public function update(ParticipantUpdateRequest $request, $id): JsonResponse
     {
         try {
-            $participant = $this->participantService->update($request->toParticipantDTO(), $id);
+            $this->participantService->update($request->toParticipantDTO(), $id);
 
-            return $this->success('Participante actualizado con éxito', $participant);
+            return $this->success('Participante actualizado con éxito');
         } catch (\Throwable $th) {
             return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
         }
