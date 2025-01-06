@@ -11,6 +11,7 @@ Route::get('/', function () {
 });
 
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/participants/show-detail/{identification}', [ParticipantController::class, 'showDetail']);
 
 Route::middleware('auth:sanctum')->group(function () {
     // Autenticación
@@ -27,7 +28,6 @@ Route::middleware('auth:sanctum')->group(function () {
     // Participantes
     Route::get('/participants', [ParticipantController::class, 'index']);
     Route::get('/participants/show/{id}', [ParticipantController::class, 'show']);
-    Route::get('/participants/show-detail/{id}', [ParticipantController::class, 'showDetail']);
     Route::post('/participants', [ParticipantController::class, 'store']);
     Route::put('/participants/{id}', [ParticipantController::class, 'update']);
     Route::delete('/participants/{id}', [ParticipantController::class, 'destroy']);

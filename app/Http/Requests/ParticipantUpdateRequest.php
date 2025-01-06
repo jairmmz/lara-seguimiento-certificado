@@ -22,11 +22,11 @@ class ParticipantUpdateRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'name' => 'required'|'string'|'max:100',
-            'last_name' => 'required'|'string'|'max:100',
-            'identification' => 'required'|'string'|'max:20',
+            'name' => 'required|string|max:100',
+            'last_name' => 'required|string|max:100',
+            'identification' => 'required|string|max:20',
             'email' => 'nullable|string|email|max:50|unique:participants,email,' . $this->route('id'),
-            'phone' => 'nullable'|'string'|'max:20'|'unique:participants,phone,' . $this->route('id'),
+            'phone' => 'nullable|string|max:20|unique:participants,phone,' . $this->route('id'),
         ];
     }
 

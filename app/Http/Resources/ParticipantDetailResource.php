@@ -17,7 +17,6 @@ class ParticipantDetailResource extends JsonResource
         return [
             'participant' => [
                 'name' => $this->name,
-                'first_name' => $this->first_name,
                 'last_name' => $this->last_name,
                 'identification' => $this->identification,
                 'email' => $this->email,

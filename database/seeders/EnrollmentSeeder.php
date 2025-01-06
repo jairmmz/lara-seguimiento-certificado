@@ -30,20 +30,27 @@ class EnrollmentSeeder extends Seeder
             ],
             [
                 'id' => 3,
-                'participant_id' => 3,
+                'participant_id' => 2,
                 'type_participant_id' => 1,
                 'course_id' => 3,
                 'status' => 'completado'
             ],
             [
                 'id' => 4,
-                'participant_id' => 4,
+                'participant_id' => 3,
                 'type_participant_id' => 1,
                 'course_id' => 4,
                 'status' => 'completado'
             ],
             [
                 'id' => 5,
+                'participant_id' => 4,
+                'type_participant_id' => 2,
+                'course_id' => 5,
+                'status' => 'completado'
+            ],
+            [
+                'id' => 6,
                 'participant_id' => 5,
                 'type_participant_id' => 2,
                 'course_id' => 5,

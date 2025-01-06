@@ -36,10 +36,10 @@ class ParticipantController extends Controller
         }
     }
 
-    public function showDetail($id): JsonResponse
+    public function showDetail(string $identification): JsonResponse
     {
         try {
-            $participant = $this->participantService->showDetail($id);
+            $participant = $this->participantService->showDetail($identification);
 
             return $this->success('Participante obtenido con éxito', $participant);
         } catch (\Throwable $th) {

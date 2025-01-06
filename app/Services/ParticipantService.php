@@ -21,9 +21,9 @@ class ParticipantService
         return new ParticipantResource($participant);
     }
 
-    public function showDetail($id)
+    public function showDetail(string $identification)
     {
-        $participant = Participant::with('enrollments.course', 'enrollments.typeParticipant')->findOrFail($id);
+        $participant = Participant::with('enrollments.course', 'enrollments.typeParticipant')->where('identification', $identification)->first();
         return ParticipantDetailResource::make($participant);
     }
 
