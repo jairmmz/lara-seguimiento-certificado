@@ -79,6 +79,13 @@ Opcionalmente, ejecuta los seeders para poblar la base de datos con datos inicia
 php artisan db:seed
 ```
 
+
+## Para eliminar las tablas de la base de datos y ejecutar los seeders:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
 ## Iniciar el servidor de desarrollo
 
 Inicia el servidor de Laravel (O iniciar por laragon por el host virtual del proyecto):
