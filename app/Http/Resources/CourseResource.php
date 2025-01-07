@@ -18,8 +18,8 @@ class CourseResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'start_date' => $this->start_date->format('d/m/Y'),
-            'end_date' => $this->end_date->format('d/m/Y'),
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
         ];
     }
 }

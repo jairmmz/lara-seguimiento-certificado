@@ -20,7 +20,7 @@ class CourseService
     {
         $course = Course::findOrFail($id);
 
-        return new CourseResource($course);
+        return CourseResource::make($course);
     }
 
     public function showDetail($id)
