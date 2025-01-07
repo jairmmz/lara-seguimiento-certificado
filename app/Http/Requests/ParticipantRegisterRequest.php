@@ -22,11 +22,11 @@ class ParticipantRegisterRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:100'],
-            'last_name' => ['required', 'string', 'max:100'],
-            'identification' => ['required', 'string', 'max:20'],
-            'email' => ['nullable', 'string', 'email', 'max:50', 'unique:participants,email'],
-            'phone' => ['nullable', 'string', 'max:20', 'unique:participants,phone'],
+            'name' => 'required|string|max:100',
+            'last_name' => 'required|string|max:100',
+            'identification' => 'required|string|max:20|unique:participants,identification',
+            'email' => 'nullable|string|email|max:50|unique:participants,email',
+            'phone' => 'nullable|string|max:20|unique:participants,phone',
         ];
     }
 
@@ -42,11 +42,14 @@ class ParticipantRegisterRequest extends BaseRequest
             'identification.required' => 'El campo identificación es obligatorio',
             'identification.string' => 'El campo identificación debe ser un texto',
             'identification.max' => 'El campo identificación debe tener máximo 20 caracteres',
+            'identification.unique' => 'El campo identificación ya está en uso',
             'email.string' => 'El campo email debe ser un texto',
             'email.email' => 'El campo email debe ser un correo electrónico',
             'email.max' => 'El campo email debe tener máximo 50 caracteres',
+            'email.unique' => 'El campo email ya está en uso',
             'phone.string' => 'El campo teléfono debe ser un texto',
             'phone.max' => 'El campo teléfono debe tener máximo 20 caracteres',
+            'phone.unique' => 'El campo teléfono ya está en uso',
         ];
     }
 

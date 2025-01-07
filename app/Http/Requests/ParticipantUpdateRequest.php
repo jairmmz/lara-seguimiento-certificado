@@ -24,7 +24,7 @@ class ParticipantUpdateRequest extends BaseRequest
         return [
             'name' => 'required|string|max:100',
             'last_name' => 'required|string|max:100',
-            'identification' => 'required|string|max:20',
+            'identification' => 'required|string|max:20,unique:participants,identification,' . $this->route('id'),
             'email' => 'nullable|string|email|max:50|unique:participants,email,' . $this->route('id'),
             'phone' => 'nullable|string|max:20|unique:participants,phone,' . $this->route('id'),
         ];
@@ -42,6 +42,7 @@ class ParticipantUpdateRequest extends BaseRequest
             'identification.required' => 'El campo identificación es obligatorio',
             'identification.string' => 'El campo identificación debe ser un texto',
             'identification.max' => 'El campo identificación debe tener máximo 20 caracteres',
+            'identification.unique' => 'El campo identificación ya se encuentra registrado',
             'email.string' => 'El campo email debe ser un texto',
             'email.email' => 'El campo email debe ser un correo electrónico',
             'email.max' => 'El campo email debe tener máximo 50 caracteres',
