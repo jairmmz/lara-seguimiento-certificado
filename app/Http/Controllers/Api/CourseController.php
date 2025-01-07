@@ -50,9 +50,9 @@ class CourseController extends Controller
     public function store(CourseRegisterRequest $request): JsonResponse
     {
         try {
-            $course = $this->courseService->store($request->toCourseDTO());
+            $this->courseService->store($request->toCourseDTO());
 
-            return $this->success('Curso registrado con éxito', $course);
+            return $this->success('Curso registrado con éxito', null, 201);
         } catch (\Throwable $th) {
             return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
         }
@@ -61,9 +61,9 @@ class CourseController extends Controller
     public function update(CourseUpdateRequest $request, $id): JsonResponse
     {
         try {
-            $course = $this->courseService->update($request->toCourseDTO(), $id);
+            $this->courseService->update($request->toCourseDTO(), $id);
 
-            return $this->success('Curso actualizado con éxito', $course);
+            return $this->success('Curso actualizado con éxito');
         } catch (\Throwable $th) {
             return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
         }

@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('courses', function (Blueprint $table) {
+        Schema::create('certificate_data_positions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('certificate_template_id')->constrained();
             $table->string('name');
-            $table->string('description')->nullable();
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->string('x_position');
+            $table->string('y_position');
+            $table->string('font_size');
+            $table->string('font_color');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('courses');
+        Schema::dropIfExists('certificate_data_positions');
     }
 };

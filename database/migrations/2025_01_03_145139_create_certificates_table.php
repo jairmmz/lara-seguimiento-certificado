@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('certificates', function (Blueprint $table) {
             $table->id();
             $table->foreignId('participant_id')->constrained();
+            $table->foreignId('type_participant_id')->constrained()->onDelete('cascade');
             $table->foreignId('course_id')->constrained();
             $table->foreignId('certificate_template_id')->constrained();
             $table->date('issue_date');
             $table->string('certificate_url');
             $table->enum('status', ['pendiente', 'completado', 'cancelado'])->default('pendiente');
+            $table->uuid('qr_code')->unique();
             $table->timestamps();
         });
     }

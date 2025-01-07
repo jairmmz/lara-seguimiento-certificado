@@ -25,24 +25,20 @@ class CourseService
 
     public function showDetail($id)
     {
-        $course = Course::with('enrollments.participant', 'enrollments.typeParticipant')->findOrFail($id);
+        $course = Course::with('certificates.participant', 'certificates.typeParticipant')->findOrFail($id);
 
         return CourseDetailResource::make($course);
     }
 
-    public function store(CourseDTO $dto)
+    public function store(CourseDTO $dto): void
     {
-        $course = Course::create($dto->toArray());
-
-        return new CourseResource($course);
+        Course::create($dto->toArray());
     }
 
-    public function update(CourseDTO $dto, $id)
+    public function update(CourseDTO $dto, $id): void
     {
         $course = Course::findOrFail($id);
         $course->update($dto->toArray());
-
-        return new CourseResource($course);
     }
 
     public function destroy($id): void

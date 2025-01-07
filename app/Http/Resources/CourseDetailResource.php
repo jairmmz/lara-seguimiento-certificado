@@ -20,7 +20,6 @@ class CourseDetailResource extends JsonResource
             'description' => $this->description,
             'start_date' => $this->start_date->format('d/m/Y'),
             'end_date' => $this->end_date->format('d/m/Y'),
-            'enrollments' => EnrollmentResource::collection($this->enrollments),
         ];
     }
 }

@@ -11,7 +11,8 @@ class Certificate extends Model
         'course_id',
         'issue_date',
         'certificate_url',
-        'status'
+        'status',
+        'validation_code'
     ];
 
     protected function casts(): array
@@ -29,5 +30,10 @@ class Certificate extends Model
     public function course()
     {
         return $this->belongsTo(Course::class);
+    }
+
+    public function typeParticipant()
+    {
+        return $this->belongsTo(TypeParticipant::class);
     }
 }

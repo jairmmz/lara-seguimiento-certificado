@@ -23,7 +23,7 @@ class CourseRegisterRequest extends BaseRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
+            'description' => ['nullable', 'string', 'max:100'],
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date'],
         ];
@@ -35,7 +35,7 @@ class CourseRegisterRequest extends BaseRequest
             'name.required' => 'El nombre del curso es requerido',
             'name.string' => 'El nombre del curso debe ser un texto',
             'name.max' => 'El nombre del curso no debe exceder los 255 caracteres',
-            'description.required' => 'La descripción del curso es requerida',
+            'description.max' => 'La descripción del curso no debe exceder los 100 caracteres',
             'description.string' => 'La descripción del curso debe ser un texto',
             'start_date.required' => 'La fecha de inicio del curso es requerida',
             'start_date.date' => 'La fecha de inicio del curso debe ser una fecha',

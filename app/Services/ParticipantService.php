@@ -23,7 +23,7 @@ class ParticipantService
 
     public function showDetail(string $identification)
     {
-        $participant = Participant::with('enrollments.course', 'enrollments.typeParticipant')->where('identification', $identification)->first();
+        $participant = Participant::with('certificates.course', 'certificates.typeParticipant')->where('identification', $identification)->first();
         return ParticipantDetailResource::make($participant);
     }
 

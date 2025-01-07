@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
             ParticipantSeeder::class,
             TypeParticipantSeeder::class,
             CourseSeeder::class,
-            EnrollmentSeeder::class,
+            CertificateTemplateSeeder::class,
+            CertificateSeeder::class,
         ]);
     }
 }
