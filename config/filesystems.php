@@ -37,6 +37,24 @@ return [
             'throw' => false,
         ],
 
+        // Plantilla de Certificados PDF
+        'certificate_templates' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/certificate_templates'),
+            'url' => env('APP_URL').'/storage/certificate_templates',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        // Certificados PDF
+        'certificates' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/certificates'),
+            'url' => env('APP_URL').'/storage/certificates',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

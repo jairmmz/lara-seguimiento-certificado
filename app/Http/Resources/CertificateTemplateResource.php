@@ -14,6 +14,11 @@ class CertificateTemplateResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'template_file' => $this->template_file,
+            'template_file_url' => $this->template_file_url,
+        ];
     }
 }

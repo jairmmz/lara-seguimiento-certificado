@@ -42,6 +42,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/courses/{id}', [CourseController::class, 'update']);
     Route::delete('/courses/{id}', [CourseController::class, 'destroy']);
 
+    // Plantilla de Certificados
+    Route::get('/certificate-templates', [CertificateTemplateController::class, 'index']);
+    Route::get('/certificate-templates/show/{id}', [CertificateTemplateController::class, 'show']);
+    Route::get('/certificate-templates/show-detail/{id}', [CertificateTemplateController::class, 'showDetail']);
+    Route::post('/certificate-templates', [CertificateTemplateController::class, 'store']);
+    Route::put('/certificate-templates/{id}', [CertificateTemplateController::class, 'update']);
+    Route::delete('/certificate-templates/{id}', [CertificateTemplateController::class, 'destroy']);
+        
     // Certificados
     Route::get('/certificates', [CertificateController::class, 'index']);
     Route::get('/certificates/show/{id}', [CertificateController::class, 'show']);
@@ -49,15 +57,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/certificates', [CertificateController::class, 'store']);
     Route::put('/certificates/{id}', [CertificateController::class, 'update']);
     Route::delete('/certificates/{id}', [CertificateController::class, 'destroy']);
-    
-    // Plantilla de Certificados
-    Route::get('/certificates-template', [CertificateTemplateController::class, 'index']);
-    Route::get('/certificates-template/show/{id}', [CertificateTemplateController::class, 'show']);
-    Route::get('/certificates-template/show-detail/{id}', [CertificateTemplateController::class, 'showDetail']);
-    Route::post('/certificates-template', [CertificateTemplateController::class, 'store']);
-    Route::put('/certificates-template/{id}', [CertificateTemplateController::class, 'update']);
-    Route::delete('/certificates-template/{id}', [CertificateTemplateController::class, 'destroy']);
-
 });
 
 /*

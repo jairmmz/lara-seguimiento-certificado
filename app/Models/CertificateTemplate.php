@@ -11,8 +11,17 @@ class CertificateTemplate extends Model
         'template_file'
     ];
 
+    protected $appends = [
+        'template_file_url'
+    ];
+
     public function certificates()
     {
         return $this->hasMany(Certificate::class);
+    }
+
+    public function getTemplateFileUrlAttribute()
+    {
+        return generateUrl('certificate_templates', $this->template_file);
     }
 }
