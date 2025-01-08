@@ -3,64 +3,80 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Certificate;
-use Illuminate\Http\Request;
+use App\Http\Requests\CertificateRegisterRequest;
+use App\Http\Requests\CertificateUpdateRequest;
+use App\Services\CertificateService;
+use Illuminate\Http\JsonResponse;
 
 class CertificateController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct(
+        private CertificateService $certificateService
+    ) { }
+
+    public function index(): JsonResponse
     {
-        //
+        try {
+            $certificates = $this->certificateService->index();
+
+            return $this->success('Certificados obtenidos con éxito', $certificates);
+        } catch (\Throwable $th) {
+            return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id): JsonResponse
     {
-        //
+        try {
+            $certificate = $this->certificateService->show($id);
+
+            return $this->success('Certificado obtenido con éxito', $certificate);
+        } catch (\Throwable $th) {
+            return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function showDetail($id): JsonResponse
     {
-        //
+        try {
+            $certificate = $this->certificateService->showDetail($id);
+
+            return $this->success('Certificado obtenido con éxito', $certificate);
+        } catch (\Throwable $th) {
+            return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Certificate $certificate)
+    public function store(CertificateRegisterRequest $request): JsonResponse
     {
-        //
+        try {
+            $this->certificateService->store($request->toCertificateDTO());
+
+            return $this->success('Certificado registrado con éxito', null, 201);
+        } catch (\Throwable $th) {
+            return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Certificate $certificate)
+    public function update(CertificateUpdateRequest $request, $id): JsonResponse
     {
-        //
+        try {
+            $this->certificateService->update($request->toCertificateDTO(), $id);
+
+            return $this->success('Certificado actualizado con éxito');
+        } catch (\Throwable $th) {
+            return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Certificate $certificate)
+    public function destroy($id): JsonResponse
     {
-        //
-    }
+        try {
+            $this->certificateService->destroy($id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Certificate $certificate)
-    {
-        //
+            return $this->success('Certificado eliminado con éxito');
+        } catch (\Throwable $th) {
+            return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
+        }
     }
 }

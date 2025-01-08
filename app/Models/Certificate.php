@@ -8,11 +8,13 @@ class Certificate extends Model
 {
     protected $fillable = [
         'participant_id',
+        'type_participant_id',
         'course_id',
+        'certificate_template_id',
         'issue_date',
         'certificate_url',
         'status',
-        'validation_code'
+        'qr_code'
     ];
 
     protected function casts(): array
