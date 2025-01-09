@@ -10,11 +10,14 @@ class Certificate extends Model
         'participant_id',
         'type_participant_id',
         'course_id',
-        'certificate_template_id',
         'issue_date',
-        'certificate_url',
+        'certificate_file',
         'status',
         'qr_code'
+    ];
+
+    protected $appends = [
+        'certificate_file_url'
     ];
 
     protected function casts(): array
@@ -37,5 +40,10 @@ class Certificate extends Model
     public function typeParticipant()
     {
         return $this->belongsTo(TypeParticipant::class);
+    }
+
+    public function getCertificateFileUrlAttribute()
+    {
+        return generateUrl('certificates', $this->certificate_file);
     }
 }

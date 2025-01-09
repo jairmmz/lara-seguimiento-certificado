@@ -19,9 +19,8 @@ class CertificateSeeder extends Seeder
                 'participant_id' => 1,
                 'type_participant_id' => 1,
                 'course_id' => 1,
-                'certificate_template_id' => 1,
                 'issue_date' => '2025-01-10',
-                'certificate_url' => 'https://example.com/certificate/1',
+                'certificate_file' => 'dasdasdasfasd.pdf',
                 'status' => 'completado',
                 'qr_code' => 'https://example.com/qr/1'
             ],
@@ -30,9 +29,8 @@ class CertificateSeeder extends Seeder
                 'participant_id' => 2,
                 'type_participant_id' => 1,
                 'course_id' => 2,
-                'certificate_template_id' => 2,
                 'issue_date' => '2022-01-02',
-                'certificate_url' => 'https://example.com/certificate/2',
+                'certificate_file' => 'dasdasdasfasd1.pdf',
                 'status' => 'completado',
                 'qr_code' => 'https://example.com/qr/2'
             ],
@@ -41,9 +39,8 @@ class CertificateSeeder extends Seeder
                 'participant_id' => 2,
                 'type_participant_id' => 1,
                 'course_id' => 3,
-                'certificate_template_id' => 3,
                 'issue_date' => '2021-01-03',
-                'certificate_url' => 'https://example.com/certificate/3',
+                'certificate_file' => 'dasdasdasfasd2.pdf',
                 'status' => 'completado',
                 'qr_code' => 'https://example.com/qr/3'
             ],
@@ -52,9 +49,8 @@ class CertificateSeeder extends Seeder
                 'participant_id' => 3,
                 'type_participant_id' => 1,
                 'course_id' => 4,
-                'certificate_template_id' => 1,
                 'issue_date' => '2025-02-04',
-                'certificate_url' => 'https://example.com/certificate/4',
+                'certificate_file' => 'dasdasdasfasd3.pdf',
                 'status' => 'pendiente',
                 'qr_code' => 'https://example.com/qr/4'
             ],
@@ -63,9 +59,8 @@ class CertificateSeeder extends Seeder
                 'participant_id' => 4,
                 'type_participant_id' => 2,
                 'course_id' => 5,
-                'certificate_template_id' => 2,
                 'issue_date' => '2024-01-05',
-                'certificate_url' => 'https://example.com/certificate/5',
+                'certificate_file' => 'dasdasdasfasd4.pdf',
                 'status' => 'completado',
                 'qr_code' => 'https://example.com/qr/5'
             ],
@@ -74,9 +69,8 @@ class CertificateSeeder extends Seeder
                 'participant_id' => 5,
                 'type_participant_id' => 2,
                 'course_id' => 5,
-                'certificate_template_id' => 1,
                 'issue_date' => '2021-01-06',
-                'certificate_url' => 'https://example.com/certificate/6',
+                'certificate_file' => 'dasdasdasfasd5.pdf',
                 'status' => 'cancelado',
                 'qr_code' => 'https://example.com/qr/6'
             ]

@@ -16,11 +16,10 @@ return new class extends Migration
             $table->foreignId('participant_id')->constrained();
             $table->foreignId('type_participant_id')->constrained()->onDelete('cascade');
             $table->foreignId('course_id')->constrained();
-            $table->foreignId('certificate_template_id')->constrained();
             $table->date('issue_date');
-            $table->string('certificate_url')->unique()->nullable();
+            $table->string('certificate_file')->unique()->nullable();
             $table->enum('status', ['pendiente', 'completado', 'cancelado'])->default('pendiente');
-            $table->uuid('qr_code')->unique()->nullable();
+            $table->string('qr_code')->unique()->nullable();
             $table->timestamps();
         });
     }

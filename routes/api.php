@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CertificateController;
-use App\Http\Controllers\Api\CertificateTemplateController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\ParticipantController;
 use App\Http\Controllers\Api\UserController;
@@ -42,14 +41,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/courses/{id}', [CourseController::class, 'update']);
     Route::delete('/courses/{id}', [CourseController::class, 'destroy']);
 
-    // Plantilla de Certificados
-    Route::get('/certificate-templates', [CertificateTemplateController::class, 'index']);
-    Route::get('/certificate-templates/show/{id}', [CertificateTemplateController::class, 'show']);
-    Route::get('/certificate-templates/show-detail/{id}', [CertificateTemplateController::class, 'showDetail']);
-    Route::post('/certificate-templates', [CertificateTemplateController::class, 'store']);
-    Route::put('/certificate-templates/{id}', [CertificateTemplateController::class, 'update']);
-    Route::delete('/certificate-templates/{id}', [CertificateTemplateController::class, 'destroy']);
-        
     // Certificados
     Route::get('/certificates', [CertificateController::class, 'index']);
     Route::get('/certificates/show/{id}', [CertificateController::class, 'show']);
