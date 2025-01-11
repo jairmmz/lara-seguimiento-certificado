@@ -7,13 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Certificate extends Model
 {
     protected $fillable = [
-        'participant_id',
-        'type_participant_id',
-        'course_id',
-        'issue_date',
+        'registration_id',
         'certificate_file',
         'status',
-        'qr_code'
+        'qr_code',
     ];
 
     protected $appends = [
@@ -23,27 +20,17 @@ class Certificate extends Model
     protected function casts(): array
     {
         return [
-            'issue_date' => 'date'
+            'registration_id' => 'integer',
         ];
     }
 
-    public function participant()
+    public function registration()
     {
-        return $this->belongsTo(Participant::class);
+        return $this->belongsTo(Registration::class);
     }
 
-    public function course()
+    public function getRegistrationFileUrlAttribute()
     {
-        return $this->belongsTo(Course::class);
-    }
-
-    public function typeParticipant()
-    {
-        return $this->belongsTo(TypeParticipant::class);
-    }
-
-    public function getCertificateFileUrlAttribute()
-    {
-        return generateUrl('certificates', $this->certificate_file);
+        return generateUrl('registrations', $this->registration_file);
     }
 }

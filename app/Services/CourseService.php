@@ -25,7 +25,7 @@ class CourseService
 
     public function showDetail($id)
     {
-        $course = Course::with('certificates.participant', 'certificates.typeParticipant')->findOrFail($id);
+        $course = Course::with('registrations.participant', 'registrations.typeParticipant')->findOrFail($id);
 
         return CourseDetailResource::make($course);
     }

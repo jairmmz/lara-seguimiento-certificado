@@ -14,8 +14,8 @@ class Participant extends Model
         'phone'
     ];
 
-    public function certificates()
+    public function registrations()
     {
-        return $this->hasMany(Certificate::class);
+        return $this->hasMany(Registration::class);
     }
 }

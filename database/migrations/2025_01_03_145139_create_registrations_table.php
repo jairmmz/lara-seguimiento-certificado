@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('certificates', function (Blueprint $table) {
+        Schema::create('registrations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('participant_id')->constrained();
-            $table->foreignId('type_participant_id')->constrained()->onDelete('cascade');
+            $table->foreignId('type_participant_id')->constrained();
             $table->foreignId('course_id')->constrained();
-            $table->date('issue_date');
-            $table->string('certificate_file')->unique()->nullable();
-            $table->enum('status', ['pendiente', 'completado', 'cancelado'])->default('pendiente');
-            $table->string('qr_code')->unique()->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('certificates');
+        Schema::dropIfExists('registrations');
     }
 };

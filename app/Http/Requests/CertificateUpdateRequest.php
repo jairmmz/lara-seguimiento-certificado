@@ -22,42 +22,35 @@ class CertificateUpdateRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'participant_id' => 'required|exists:participants,id',
-            'type_participant_id' => 'required|exists:type_participants,id',
-            'course_id' => 'required|exists:courses,id',
-            'certificate_template_id' => 'required|certificate_templates,id',
-            'issue_date' => 'required|date',
-            'status' => 'required|in:pendiente,completado,cancelado',
+            'registration_id' => 'required|exists:registrations,id',
+            'certificate_file' => 'required|file|mimes:pdf|',
+            'status' => 'required|in:pendiente,aprobado,rechazado',
+            'qr_code' => 'nullable|file|mimes:png',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'participant_id.required' => 'El campo participante es obligatorio',
-            'participant_id.exists' => 'El participante seleccionado no existe',
-            'type_participant_id.required' => 'El campo tipo de participante es obligatorio',
-            'type_participant_id.exists' => 'El tipo de participante seleccionado no existe',
-            'course_id.required' => 'El campo curso es obligatorio',
-            'course_id.exists' => 'El curso seleccionado no existe',
-            'certificate_template_id.required' => 'El campo plantilla de certificado es obligatorio',
-            'certificate_template_id.exists' => 'La plantilla de certificado seleccionada no existe',
-            'issue_date.required' => 'El campo fecha de emisión es obligatorio',
-            'issue_date.date' => 'El campo fecha de emisión debe ser una fecha',
+            'registration_id.required' => 'El campo registro es obligatorio',
+            'registration_id.exists' => 'El registro seleccionado no existe',
+            'certificate_file.required' => 'El campo archivo de certificado es obligatorio',
+            'certificate_file.file' => 'El archivo de certificado debe ser un archivo',
+            'certificate_file.mimes' => 'El archivo de certificado debe ser un archivo de tipo: pdf',
             'status.required' => 'El campo estado es obligatorio',
-            'status.in' => 'El campo estado debe ser pendiente, completado o cancelado',
+            'status.in' => 'El campo estado debe ser uno de los siguientes valores: pendiente, aprobado, rechazado',
+            'qr_code.file' => 'El archivo de código QR debe ser un archivo',
+            'qr_code.mimes' => 'El archivo de código QR debe ser un archivo de tipo: png',
         ];
     }
 
     public function toCertificateDTO(): CertificateDTO
     {
         return new CertificateDTO(
-            participant_id: $this->input('participant_id'),
-            type_participant_id: $this->input('type_participant_id'),
-            course_id: $this->input('course_id'),
-            certificate_template_id: $this->input('certificate_template_id'),
-            issue_date: $this->input('issue_date'),
+            registration_id: $this->input('registration_id'),
+            certificate_file: $this->file('certificate_file'),
             status: $this->input('status'),
+            qr_code: $this->file('qr_code'),
         );
     }
 }

@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\CertificateController;
+use App\Http\Controllers\Api\RegistrationController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\ParticipantController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\CertificateController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -41,10 +42,18 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/courses/{id}', [CourseController::class, 'update']);
     Route::delete('/courses/{id}', [CourseController::class, 'destroy']);
 
+    // Inscripciones
+    Route::get('/registrations', [RegistrationController::class, 'index']);
+    Route::get('/registrations/courses-participants-not-registrations', [RegistrationController::class, 'coursesParticipantsNotRegistrations']);
+    Route::get('/registrations/show/{id}', [RegistrationController::class, 'show']);
+    Route::get('/registrations/show-detail/{id}', [RegistrationController::class, 'showDetail']);
+    Route::post('/registrations', [RegistrationController::class, 'store']);
+    Route::put('/registrations/{id}', [RegistrationController::class, 'update']);
+    Route::delete('/registrations/{id}', [RegistrationController::class, 'destroy']);
+
     // Certificados
     Route::get('/certificates', [CertificateController::class, 'index']);
     Route::get('/certificates/show/{id}', [CertificateController::class, 'show']);
-    Route::get('/certificates/show-detail/{id}', [CertificateController::class, 'showDetail']);
     Route::post('/certificates', [CertificateController::class, 'store']);
     Route::put('/certificates/{id}', [CertificateController::class, 'update']);
     Route::delete('/certificates/{id}', [CertificateController::class, 'destroy']);

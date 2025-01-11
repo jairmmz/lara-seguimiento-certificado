@@ -37,15 +37,6 @@ return [
             'throw' => false,
         ],
 
-        // Plantilla de Certificados PDF
-        'certificate_templates' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public/certificate_templates'),
-            'url' => env('APP_URL').'/storage/certificate_templates',
-            'visibility' => 'public',
-            'throw' => false,
-        ],
-
         // Certificados PDF
         'certificates' => [
             'driver' => 'local',

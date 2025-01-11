@@ -22,7 +22,7 @@ class ParticipantDetailResource extends JsonResource
                 'email' => $this->email,
                 'phone' => $this->phone
             ],
-            'certificates' => CertificateDetailResource::collection($this->whenLoaded('certificates')),
+            'registrations' => RegistrationDetailResource::collection($this->whenLoaded('registrations')),
         ];
     }
 }

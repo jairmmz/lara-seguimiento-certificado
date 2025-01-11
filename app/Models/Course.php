@@ -21,9 +21,9 @@ class Course extends Model
         ];
     }
 
-    public function certificates()
+    public function registrations()
     {
-        return $this->hasMany(Certificate::class);
+        return $this->hasMany(Registration::class);
     }
 
 }
