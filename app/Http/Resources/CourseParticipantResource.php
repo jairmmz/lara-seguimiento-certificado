@@ -15,7 +15,6 @@ class CourseParticipantResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'courses' => CourseResource::collection($this['courses']),
             'participants' => ParticipantResource::collection($this['participants']),
             'type_participants' => TypeParticipantResource::collection($this['type_participants']),
         ];

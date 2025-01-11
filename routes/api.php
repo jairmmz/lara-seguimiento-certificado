@@ -44,11 +44,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Inscripciones
     Route::get('/registrations', [RegistrationController::class, 'index']);
-    Route::get('/registrations/courses-participants-not-registrations', [RegistrationController::class, 'coursesParticipantsNotRegistrations']);
-    Route::get('/registrations/show/{id}', [RegistrationController::class, 'show']);
-    Route::get('/registrations/show-detail/{id}', [RegistrationController::class, 'showDetail']);
-    Route::post('/registrations', [RegistrationController::class, 'store']);
-    Route::put('/registrations/{id}', [RegistrationController::class, 'update']);
+    Route::get('/registrations/courses-participants-not-registrations/{id}', [RegistrationController::class, 'coursesParticipantsNotRegistrations']);
+    Route::get('/registrations/participants-registrations-by-course/{id}', [RegistrationController::class, 'getParticipantsByCourse']);
+    Route::post('/registrations/{id}', [RegistrationController::class, 'store']);
     Route::delete('/registrations/{id}', [RegistrationController::class, 'destroy']);
 
     // Certificados

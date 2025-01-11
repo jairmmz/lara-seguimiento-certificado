@@ -21,14 +21,16 @@ class RegistrationService
         return ParticipantsByCourseResource::collection($courses);
     }
 
-    public function coursesParticipantsNotRegistrations()
+    public function coursesParticipantsNotRegistrations($id)
     {
-        $courses = Course::doesntHave('registrations')->get();
-        $participants = Participant::all();
+        // Traer todos los participantes que no estén registrados en el curso
+        $participants = Participant::whereDoesntHave('registrations', function ($query) use ($id) {
+            $query->where('course_id', $id);
+        })->get();
+
         $typeParticipants = TypeParticipant::all();
 
         $arrayData = [
-            'courses' => $courses,
             'participants' => $participants,
             'type_participants' => $typeParticipants,
         ];
@@ -36,56 +38,36 @@ class RegistrationService
         return CourseParticipantResource::make($arrayData);
     }
 
-
-    public function show($id)
+    public function getParticipantsByCourse($id)
     {
-        $registration = Registration::with('participant', 'course')->findOrFail($id);
-        return RegistrationDetailResource::make($registration);
+        $course = Course::with('registrations.participant', 'registrations.typeParticipant')->findOrFail($id);
+        $participants = $course->registrations->map(function ($registration) {
+            return [
+                'id' => $registration->id,
+                'participant_id' => $registration->participant->id,
+                'participant_name' => $registration->participant->name,
+                'participant_last_name' => $registration->participant->last_name,
+                'participant_identification' => $registration->participant->identification,
+                'type_participant_id' => $registration->typeParticipant->id,
+                'type_participant' => $registration->typeParticipant->name,
+            ];
+        });
+
+        return $participants;
     }
 
-    public function showDetail($id)
+    public function store(RegistrationDTO $registerDdtos, $idCourse): void
     {
-        $registration = Registration::with('participant', 'course')->findOrFail($id);
-        return RegistrationDetailResource::make($registration);
-    }
-
-    public function store(RegistrationDTO $registerDdtos): void
-    {
-        foreach ($registerDdtos->participants as $participantDto) {
-            Registration::create([
-                'participant_id' => $participantDto->participant_id,
-                'type_participant_id' => $participantDto->type_participant_id,
-                'course_id' => $participantDto->course_id,
-            ]);
-        }
-    }
-
-    public function update(RegistrationDTO $registrationDto, $id): void
-    {
-        $registration = Registration::findOrFail($id);
-        foreach ($registrationDto->participants as $participantDto) {
-            $registration->update([
-                'participant_id' => $participantDto->participant_id,
-                'type_participant_id' => $participantDto->type_participant_id,
-            ]);
-        }
+        Registration::create([
+            'participant_id' => $registerDdtos->participant_id,
+            'type_participant_id' => $registerDdtos->type_participant_id,
+            'course_id' => $idCourse,
+        ]);
     }
 
     public function destroy($id): void
     {
         $registration = Registration::findOrFail($id);
         $registration->delete();
-    }
-
-    private function createRegistration($id): void
-    {
-        $registration = Registration::findOrFail($id);
-        $registration->update(['status' => 'CREATED']);
-    }
-
-    private function generateRegistration($id): void
-    {
-        $registration = Registration::findOrFail($id);
-        $registration->update(['status' => 'GENERATED']);
     }
 }
