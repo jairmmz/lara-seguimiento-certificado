@@ -19,8 +19,9 @@ class RegistrationDetailResource extends JsonResource
             'participant_id' => $this->participant_id,
             'type_participant_id' => $this->type_participant_id,
             'course_id' => $this->course_id,
-            'courses' => CourseResource::make($this->whenLoaded('course')),
+            'courses' => CourseDetailCertificateResource::make($this->whenLoaded('course')),
             'type_participant' => TypeParticipantResource::make($this->whenLoaded('typeParticipant')),
+            'certificate' => CertificateResource::make($this->whenLoaded('certificate')),
         ];
     }
 }

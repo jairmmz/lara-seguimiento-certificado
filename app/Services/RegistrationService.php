@@ -21,7 +21,6 @@ class RegistrationService
 
     public function coursesParticipantsNotRegistrations($id)
     {
-        // Traer todos los participantes que no estén registrados en el curso
         $participants = Participant::whereDoesntHave('registrations', function ($query) use ($id) {
             $query->where('course_id', $id);
         })->get();
