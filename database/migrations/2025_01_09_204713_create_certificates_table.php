@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('certificates', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('registration_id')->constrained();
+            $table->foreignId('registration_id')->constrained()->cascadeOnDelete();
             $table->string('certificate_file')->unique()->nullable();
             $table->enum('status', ['pendiente', 'aprobado', 'rechazado'])->default('pendiente');
             $table->string('qr_code')->unique()->nullable();

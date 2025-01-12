@@ -35,4 +35,9 @@ class Registration extends Model
     {
         return $this->belongsTo(TypeParticipant::class);
     }
+
+    public function certificate()
+    {
+        return $this->hasOne(Certificate::class);
+    }
 }

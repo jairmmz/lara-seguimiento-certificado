@@ -52,8 +52,8 @@ Route::middleware('auth:sanctum')->group(function () {
     // Certificados
     Route::get('/certificates', [CertificateController::class, 'index']);
     Route::get('/certificates/show/{id}', [CertificateController::class, 'show']);
-    Route::post('/certificates', [CertificateController::class, 'store']);
-    Route::put('/certificates/{id}', [CertificateController::class, 'update']);
+    Route::post('/certificates/create', [CertificateController::class, 'store']);
+    Route::post('/certificates/update/{id}', [CertificateController::class, 'update']);
     Route::delete('/certificates/{id}', [CertificateController::class, 'destroy']);
 });
 

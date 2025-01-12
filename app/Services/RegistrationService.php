@@ -4,14 +4,12 @@ namespace App\Services;
 
 use App\DataTransferObjects\RegistrationDTO;
 use App\Http\Resources\CourseParticipantResource;
-use App\Http\Resources\RegistrationDetailResource;
-use App\Http\Resources\RegistrationResource;
-use App\Http\Resources\CourseResource;
 use App\Http\Resources\ParticipantsByCourseResource;
 use App\Models\Registration;
 use App\Models\Course;
 use App\Models\Participant;
 use App\Models\TypeParticipant;
+use Illuminate\Support\Facades\Storage;
 
 class RegistrationService
 {
@@ -68,6 +66,13 @@ class RegistrationService
     public function destroy($id): void
     {
         $registration = Registration::findOrFail($id);
+        $certificateFile = $registration->certificate->certificate_file ?? null;
+        $registration->certificate()->delete();
         $registration->delete();
+    
+        if ($certificateFile && Storage::disk('certificates')->exists($certificateFile)) {
+            Storage::disk('certificates')->delete($certificateFile);
+        }
     }
+    
 }

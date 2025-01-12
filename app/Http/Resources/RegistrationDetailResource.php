@@ -20,7 +20,7 @@ class RegistrationDetailResource extends JsonResource
             'type_participant_id' => $this->type_participant_id,
             'course_id' => $this->course_id,
             'courses' => CourseResource::make($this->whenLoaded('course')),
-            'participant' => ParticipantResource::make($this->whenLoaded('participant')),
+            'type_participant' => TypeParticipantResource::make($this->whenLoaded('typeParticipant')),
         ];
     }
 }

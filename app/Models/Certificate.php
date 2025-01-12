@@ -29,8 +29,8 @@ class Certificate extends Model
         return $this->belongsTo(Registration::class);
     }
 
-    public function getRegistrationFileUrlAttribute()
+    public function getCertificateFileUrlAttribute()
     {
-        return generateUrl('registrations', $this->registration_file);
+        return generateUrl('certificates', $this->certificate_file);
     }
 }
