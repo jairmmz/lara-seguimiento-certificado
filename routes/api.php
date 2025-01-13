@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\ParticipantController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\CertificateController;
+use App\Http\Controllers\Api\HomeAdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -24,7 +25,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/users', [UserController::class, 'index']);
     Route::post('/users', [UserController::class, 'register']);
     Route::get('/users/{id}', [UserController::class, 'show']);
-    Route::put('/users/{id}', [UserController::class, 'update']);
+    Route::patch('/users/update-profile', [UserController::class, 'updateProfile']);
+    Route::patch('/users/update-password', [UserController::class, 'updatePassword']);
     Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
     // Participantes
@@ -55,6 +57,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/certificates/create', [CertificateController::class, 'store']);
     Route::post('/certificates/update/{id}', [CertificateController::class, 'update']);
     Route::delete('/certificates/{id}', [CertificateController::class, 'destroy']);
+
+    // Home Admin
+    Route::get('/home-admin', [HomeAdminController::class, 'index']);
+    Route::get('/home-admin/get-participants-without-registration', [HomeAdminController::class, 'getParticipantsWithoutRegistration']);
+    Route::get('/home-admin/get-courses-without-registration', [HomeAdminController::class, 'getCoursesWithoutRegistrations']);
+    Route::get('/home-admin/get-registrations-without-certificate', [HomeAdminController::class, 'getRegistrationsWithoutCertificate']);
 });
 
 /*

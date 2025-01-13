@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\DataTransferObjects\User\UserDTO;
+use App\DataTransferObjects\User\UserProfileDTO;
+use Illuminate\Validation\Rule;
 
-class UserRegisterRequest extends BaseRequest
+class UserUpdateProfileRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +24,7 @@ class UserRegisterRequest extends BaseRequest
     {
         return [
             'name' => ['required', 'string'],
-            'email' => ['required', 'string', 'email', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:8'],
-            'role' => ['required', 'string', 'in:admin,user'],
+            'email' => ['required', 'string', 'email', Rule::unique('users', 'email')->ignore(auth()->id())],
         ];
     }
 
@@ -38,23 +37,14 @@ class UserRegisterRequest extends BaseRequest
             'email.string' => 'El campo email debe ser un texto',
             'email.email' => 'El campo email debe ser un correo electrónico',
             'email.unique' => 'El campo email ya se encuentra registrado',
-            'password.required' => 'El campo contraseña es obligatorio',
-            'password.string' => 'El campo contraseña debe ser un texto',
-            'password.min' => 'El campo contraseña debe tener al menos 8 caracteres',
-            'role.required' => 'El campo rol es obligatorio',
-            'role.string' => 'El campo rol debe ser un texto',
-            'role.in' => 'El campo rol debe ser admin o user',
         ];
     }
 
-    public function toUserDTO(): UserDTO
+    public function toUserProfileDTO(): UserProfileDTO
     {
-        return new UserDTO(
+        return new UserProfileDTO(
             name: $this->name,
             email: $this->email,
-            password: $this->password,
-            role: $this->role_id,
-            is_active: $this->is_active,
         );
     }
 }
