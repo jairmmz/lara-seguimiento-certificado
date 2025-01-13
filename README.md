@@ -117,7 +117,7 @@ Inicia el servidor de Laravel (O iniciar por laragon por el host virtual del pro
 php artisan serve
 ```
 
-## Para desplegue  en producción:
+## Para optimizar el despliegue  en producción:
 
 ```bash
 php artisan optimize:clear
