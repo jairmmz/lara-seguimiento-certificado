@@ -15,6 +15,8 @@ Route::get('/', function () {
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/participants/show-detail/{identification}', [ParticipantController::class, 'showDetail']);
+Route::post('/password-reset', [UserController::class, 'sendPasswordResetLink']);
+Route::post('/password-reset/reset', [UserController::class, 'resetPassword']);
 
 Route::middleware('auth:sanctum')->group(function () {
     // Autenticación

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ResetPasswordRequest;
+use App\Http\Requests\SendPasswordResetRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Requests\UserUpdatePasswordRequest;
 use App\Http\Requests\UserUpdateProfileRequest;
@@ -76,6 +78,30 @@ class UserController extends Controller
             $this->userService->destroy($id);
 
             return $this->success('Usuario eliminado con éxito');
+        } catch (\Throwable $th) {
+            return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
+        }
+    }
+
+
+    public function sendPasswordResetLink(SendPasswordResetRequest $request): JsonResponse
+    {
+        try {
+            $this->userService->sendPasswordResetLink($request->email());
+
+            return $this->success('Se ha enviado un correo con el enlace para restablecer la contraseña, verifique su bandeja de entrada');
+        } catch (\Throwable $th) {
+            return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
+        }
+    }
+
+
+    public function resetPassword(ResetPasswordRequest $request): JsonResponse
+    {
+        try {
+            $user = $this->userService->resetPassword($request->email(), $request->token(), $request->password());
+
+            return $this->success('La contraseña ha sido actualizado con éxito', $user);
         } catch (\Throwable $th) {
             return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
         }
