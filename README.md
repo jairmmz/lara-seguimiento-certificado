@@ -86,6 +86,29 @@ php artisan db:seed
 php artisan migrate:fresh --seed
 ```
 
+## Para crear la carpeta de almacenamiento de certificados
+
+```bash
+php artisan storage:link
+```
+
+## Para eliminar la cache del servidor en desarrollo:
+
+```bash
+php artisan cache:clear
+```
+
+```bash
+php artisan config:clear
+```
+
+```bash
+php artisan route:clear
+```
+
+```bash
+php artisan view:clear
+```
 ## Iniciar el servidor de desarrollo
 
 Inicia el servidor de Laravel (O iniciar por laragon por el host virtual del proyecto):
@@ -94,7 +117,8 @@ Inicia el servidor de Laravel (O iniciar por laragon por el host virtual del pro
 php artisan serve
 ```
 
-## Licencia
+## Para optimizar el despliegue  en producción:
 
-Este proyecto está licenciado bajo la [MIT License](LICENSE).
-
+```bash
+php artisan optimize:clear
+```
