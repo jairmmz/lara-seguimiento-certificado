@@ -8,6 +8,7 @@ use App\Http\Requests\SendPasswordResetRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Requests\UserUpdatePasswordRequest;
 use App\Http\Requests\UserUpdateProfileRequest;
+use App\Http\Requests\ValidatePasswordResetTokenRequest;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 
@@ -83,7 +84,6 @@ class UserController extends Controller
         }
     }
 
-
     public function sendPasswordResetLink(SendPasswordResetRequest $request): JsonResponse
     {
         try {
@@ -95,6 +95,16 @@ class UserController extends Controller
         }
     }
 
+    public function validatePasswordResetToken(ValidatePasswordResetTokenRequest $request): JsonResponse
+    {
+        try {
+            $validate = $this->userService->validatePasswordResetToken($request->email(), $request->token());
+
+            return $this->success('Token validado con éxito', $validate);
+        } catch (\Throwable $th) {
+            return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
+        }
+    }
 
     public function resetPassword(ResetPasswordRequest $request): JsonResponse
     {

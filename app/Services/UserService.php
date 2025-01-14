@@ -83,7 +83,7 @@ class UserService
             ]
         );
 
-        $url = config('app.frontend_url') . "/reset-password?token={$token}&email={$email}";
+        $url = config('app.frontend_url') . "/restablecer-contrasenia?token={$token}&email={$email}";
 
         Resend::emails()->send([
             'from' => 'Soporte <no-reply@resend.dev>',
@@ -95,14 +95,14 @@ class UserService
         ]);
     }
 
-    private function validatePasswordResetToken(string $email, string $token): bool
+    public function validatePasswordResetToken(string $email, string $token): bool
     {
         $resetRequest = DB::table('password_reset_tokens')
             ->where('email', $email)
             ->first();
 
         if (!$resetRequest) {
-            throw new \Exception('Token o correo electrónico inválido');
+            throw new \Exception('Correo electrónico inválido');
         }
 
         if (Carbon::parse($resetRequest->created_at)->addMinutes(60)->isPast()) {
@@ -116,7 +116,7 @@ class UserService
         return true;
     }
 
-    public function resetPassword(string $email, string $token, string $newPassword): void
+    public function resetPassword(string $email, string $token, string $password): void
     {
         $this->validatePasswordResetToken($email, $token);
 
@@ -126,7 +126,7 @@ class UserService
             throw new \Exception('Usuario no encontrado');
         }
 
-        $user->password = Hash::make($newPassword);
+        $user->password = Hash::make($password);
         $user->save();
 
         DB::table('password_reset_tokens')->where('email', $email)->delete();
