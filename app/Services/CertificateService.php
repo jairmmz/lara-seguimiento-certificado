@@ -6,8 +6,11 @@ use App\DataTransferObjects\CertificateDTO;
 use App\Enums\CertificateEnum;
 use App\Http\Resources\CertificateResource;
 use App\Models\Certificate;
+use App\Models\Registration;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+
+use function PHPUnit\Framework\isEmpty;
 
 class CertificateService
 {
@@ -19,6 +22,10 @@ class CertificateService
     public function show($id)
     {
         $certificate = Certificate::where('registration_id', $id)->first();
+        if (!$certificate) {
+            return null;
+        }
+
         return CertificateResource::make($certificate);
     }
 
@@ -51,7 +58,7 @@ class CertificateService
         if (Storage::disk('certificates')->exists($certificate->certificate_file)) {
             Storage::disk('certificates')->delete($certificate->certificate_file);
         }
-        
+
         $certificate->delete();
     }
 }
