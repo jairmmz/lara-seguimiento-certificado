@@ -41,9 +41,14 @@ class CourseService
         $course->update($dto->toArray());
     }
 
-    public function destroy($id): void
+    public function destroy($id)
     {
         $course = Course::findOrFail($id);
+
+        if ($course->registrations->count() > 0) {
+            throw new \Exception('No se puede eliminar un curso con inscripciones');
+        }
+
         $course->delete();
     }
 }
