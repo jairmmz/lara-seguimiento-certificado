@@ -25,10 +25,10 @@ if (!function_exists('generateUrlTemporaly')) {
  * Función para generar una URL pública de un archivo.
  */
 if (!function_exists('generateUrl')) {
-    function generateUrl(string $disk, string $path)
+    function generateUrl(string $disk, string $file)
     {
-        if (Storage::disk($disk)->exists($path)) {
-            return Storage::disk($disk)->url($path);
+        if (Storage::disk($disk)->exists($file)) {
+            return Storage::disk($disk)->url($file);
         }
         return null;
     }

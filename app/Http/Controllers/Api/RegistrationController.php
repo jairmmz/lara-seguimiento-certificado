@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegistrationRegisterRequest;
+use App\Imports\RegistrationsImport;
 use App\Services\RegistrationService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RegistrationController extends Controller
 {
@@ -63,6 +66,20 @@ class RegistrationController extends Controller
             $this->registrationService->destroy($id);
 
             return $this->success('Certificado eliminado con éxito');
+        } catch (\Throwable $th) {
+            return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
+        }
+    }
+
+    public function importCsvParticipants(Request $request, int $courseId)
+    {
+        try {
+            $request->validate([
+                'file' => 'required|file|mimes:csv,txt'
+            ]);
+            Excel::import(new RegistrationsImport($courseId), $request->file('file'));
+
+            return $this->success('Participantes importados con éxito');
         } catch (\Throwable $th) {
             return $this->badRequest('Ocurrio un error inesperado', $th->getMessage());
         }

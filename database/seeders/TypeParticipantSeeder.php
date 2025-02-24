@@ -17,12 +17,17 @@ class TypeParticipantSeeder extends Seeder
             [
                 'id' => 1,
                 'name' => 'Participante',
-                'description' => 'Participante en un curso',
+                'description' => 'Participante en un curso, taller o evento',
             ],
             [
                 'id' => 2,
                 'name' => 'Organizador',
-                'description' => 'Organizador de un curso',
+                'description' => 'Organizador de la capacitación, curso o evento',
+            ],
+            [
+                'id' => 3,
+                'name' => 'Ponente',
+                'description' => 'Ponente de un curso, taller o evento',
             ]
         ];
 

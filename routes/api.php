@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ParticipantController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\CertificateController;
 use App\Http\Controllers\Api\HomeAdminController;
+use App\Http\Controllers\Api\ReportController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -53,6 +54,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/registrations/participants-registrations-by-course/{id}', [RegistrationController::class, 'getParticipantsByCourse']);
     Route::post('/registrations/{id}', [RegistrationController::class, 'store']);
     Route::delete('/registrations/{id}', [RegistrationController::class, 'destroy']);
+    Route::post('/registrations/import-participants/{couseId}', [RegistrationController::class, 'importCsvParticipants']);
 
     // Certificados
     Route::get('/certificates', [CertificateController::class, 'index']);
@@ -66,6 +68,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/home-admin/get-participants-without-registration', [HomeAdminController::class, 'getParticipantsWithoutRegistration']);
     Route::get('/home-admin/get-courses-without-registration', [HomeAdminController::class, 'getCoursesWithoutRegistrations']);
     Route::get('/home-admin/get-registrations-without-certificate', [HomeAdminController::class, 'getRegistrationsWithoutCertificate']);
+
+    // Reportes
+    Route::get('/reports', [ReportController::class, 'index']);
 });
 
 /*

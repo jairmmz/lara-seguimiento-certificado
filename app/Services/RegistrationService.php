@@ -68,10 +68,15 @@ class RegistrationService
         $certificateFile = $registration->certificate->certificate_file ?? null;
         $registration->certificate()->delete();
         $registration->delete();
-    
+
         if ($certificateFile && Storage::disk('certificates')->exists($certificateFile)) {
             Storage::disk('certificates')->delete($certificateFile);
         }
     }
-    
+
+    public function getNumberParticipantsByCourse()
+    {
+        $courses = Course::withCount('registrations')->get();
+        return $courses;
+    }
 }
